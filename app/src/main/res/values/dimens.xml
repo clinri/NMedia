@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_spacing">12dp</dimen>
+    <dimen name="post_avatar_size">48dp</dimen>
+    <dimen name="standard_padding_size">8dp</dimen>
+    <dimen name="font_post">11sp</dimen>
+    <dimen name="font_icons">10sp</dimen>
+</resources>
