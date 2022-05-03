@@ -1,6 +1,5 @@
 package ru.netology.nmedia.viewModel
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.adapter.PostInteractionListener
@@ -14,20 +13,20 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val currentPost = MutableLiveData<Post?>(null)
 
-    fun onSaveButtonClicked(content: String){
+    fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) {
             return
         }
         val post = currentPost.value?.copy( // edit
             content = content
-        )?: Post( // new
+        ) ?: Post( // new
             id = PostRepository.NEW_POST_ID,
             author = "Me",
             content = content,
             published = "Today"
         )
         repository.save(post)
-        currentPost.value=null
+        currentPost.value = null
     }
 
     //region PostInteractionListener
@@ -45,5 +44,8 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         currentPost.value = post
     }
 
+    override fun onCancelEditClicked() {
+        currentPost.value = null
+    }
     //endregion InteractionListener
 }
