@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="remove">Удалить</string>
+    <string name="avatar_description">Аватар</string>
+    <string name="app_name">НМедиа</string>
+    <string name="postText">Введите текст поста здесь</string>
+    <string name="description_save">Сохранить новый пост</string>
+    <string name="edit">Редактировать</string>
+    <string name="empty_content_toast">Текст поста не может быть пустым</string>
+</resources>
