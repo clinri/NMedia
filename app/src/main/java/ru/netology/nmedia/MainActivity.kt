@@ -2,36 +2,30 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
+import androidx.activity.viewModels
 import ru.netology.nmedia.databinding.ActivityPostBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<PostViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //val imageView = findViewById<ImageView>(R.id.imageView)
-        val post = Post(
-            0,
-            "Andrei",
-            "test text",
-            "01.05.2021",
-            likedByMe = true,
-            likes = 10000,
-            shareCount = 1099999
-        )
-        binding.render(post)
-        binding.like.setOnClickListener {
-            println("like clicked")
-            post.likedByMe = !post.likedByMe
-            post.likes = if (post.likedByMe) post.likes + 1 else post.likes - 1
-            binding.like.setImageResource(getLikeIcon(post.likedByMe))
-            binding.likesCount.text = post.likes.formatIntLikeVk()
+
+        viewModel.data.observe(this) { post ->
+            binding.render(post)
         }
+
+        binding.like.setOnClickListener {
+            viewModel.onLikeClicked()
+        }
+
         binding.sharePost.setOnClickListener {
-            post.shareCount = post.shareCount + 1
-            binding.sharePostCount.text = post.shareCount.formatIntLikeVk()
+            viewModel.onShareClicked()
         }
     }
 
@@ -45,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getLikeIcon(like: Boolean) =
-        if (like) R.drawable.ic_like_red_16dp else R.drawable.ic_like_16dp
+        if (like) R.drawable.ic_like_red_24dp else R.drawable.ic_like_white_24dp
 }
 
 private fun Int.formatIntLikeVk(): String {
@@ -58,7 +52,7 @@ private fun Int.formatIntLikeVk(): String {
         }
         in 1..999 -> {
             digitOne = this / 1_000
-            if (this<10_000) {
+            if (this < 10_000) {
                 digitTwo = this % 1_000 / 100
             }
             "K"

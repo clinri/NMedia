@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master, Layout ]
+    branches: [ master, Layout, 04_Like_Share ]
 
 jobs:
   build:
