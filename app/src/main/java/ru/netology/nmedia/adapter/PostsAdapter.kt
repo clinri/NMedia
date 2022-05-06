@@ -66,16 +66,12 @@ internal class PostsAdapter(
                 date.text = post.published
                 textOfPost.text = post.content
                 viewCount.text = "104"
-                like.setImageResource(getLikeIcon(post.likedByMe))
-                likesCount.text = post.likes.formatIntLikeVk()
+                like.isChecked = post.likedByMe
+                like.text = post.likes.formatIntLikeVk()
                 sharePostCount.text = post.shareCount.formatIntLikeVk()
                 menu.setOnClickListener { popupMenu.show() }
             }
         }
-
-        @DrawableRes
-        private fun getLikeIcon(like: Boolean) =
-            if (like) R.drawable.ic_like_red_24dp else R.drawable.ic_like_white_24dp
 
         private fun Int.formatIntLikeVk(): String {
             var digitOne = 0
