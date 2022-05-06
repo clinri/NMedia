@@ -14,9 +14,10 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/avatar_description"
         android:padding="@dimen/standard_padding_size"
+        android:src="@drawable/netology_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@sample/post_avatars" />
+        tools:src="@sample/post_avatars" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textTitle"
@@ -124,6 +125,7 @@
         app:layout_constraintTop_toTopOf="@id/like" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sharePostCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_icons"
