@@ -65,10 +65,10 @@ internal class PostsAdapter(
                 textTitle.text = post.author
                 date.text = post.published
                 textOfPost.text = post.content
-                viewCount.text = "104"
+                view.text = "104"
                 like.isChecked = post.likedByMe
                 like.text = post.likes.formatIntLikeVk()
-                sharePostCount.text = post.shareCount.formatIntLikeVk()
+                sharePost.text = post.shareCount.formatIntLikeVk()
                 menu.setOnClickListener { popupMenu.show() }
             }
         }
