@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master, Layout, 04_Like_Share ]
+    branches: [ master, Layout, 04_Like_Share, mvvm ]
 
 jobs:
   build:
