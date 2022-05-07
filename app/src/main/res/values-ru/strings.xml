@@ -10,4 +10,5 @@
     <string name="edit_title">Редактирование сообщения</string>
     <string name="cancel_edit">Отмена редактирования</string>
     <string name="editing_text">Редактруемое сообщение</string>
+    <string name="chooser_share_post">Поделиться</string>
 </resources>

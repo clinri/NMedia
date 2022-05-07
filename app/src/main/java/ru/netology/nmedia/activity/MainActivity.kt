@@ -1,15 +1,14 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.view.isVisible
+import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityPostBinding
-import ru.netology.nmedia.databinding.PostBinding
-import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.hideKeyboard
 import ru.netology.nmedia.viewModel.PostViewModel
 
@@ -58,6 +57,17 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.groupEdit.visibility = View.GONE
             }
+        }
+        viewModel.sharePostContent.observe(this) { postContent ->
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, postContent)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(
+                intent, getString(R.string.chooser_share_post)
+            )
+            startActivity(shareIntent)
         }
     }
 }
