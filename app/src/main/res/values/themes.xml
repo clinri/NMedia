@@ -14,21 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Widget.AppTheme.LikeCheckbox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">@color/like_checkbox_tint</item>
-        <item name="android:textColor">@color/text_button_color</item>
-        <item name="android:textSize">@dimen/font_icons</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:insetLeft">0dp</item>
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetRight">0dp</item>
-        <item name="android:insetBottom">0dp</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">0dp</item>
-        <item name="android:minHeight">40dp</item>
-    </style>
-
-    <style name="Widget.AppTheme.AllButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+    <style name="Widget.AppTheme.StandartButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="iconTint">@color/text_button_color</item>
         <item name="android:textColor">@color/text_button_color</item>
         <item name="android:textSize">@dimen/font_icons</item>
@@ -41,4 +27,10 @@
         <item name="android:minWidth">40dp</item>
         <item name="android:minHeight">40dp</item>
     </style>
+
+    <style name="Widget.AppTheme.LikeCheckbox" parent="Widget.AppTheme.StandartButton">
+        <item name="iconTint">@color/like_checkbox_tint</item>
+    </style>
+
+
 </resources>

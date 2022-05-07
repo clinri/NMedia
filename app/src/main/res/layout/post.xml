@@ -50,7 +50,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
-        style="@style/Widget.AppTheme.AllButton"
+        style="@style/Widget.AppTheme.StandartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -110,7 +110,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sharePost"
-        style="@style/Widget.AppTheme.AllButton"
+        style="@style/Widget.AppTheme.StandartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -123,7 +123,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/view"
-        style="@style/Widget.AppTheme.AllButton"
+        style="@style/Widget.AppTheme.StandartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
