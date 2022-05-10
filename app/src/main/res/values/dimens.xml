@@ -5,4 +5,5 @@
     <dimen name="standard_padding_size">8dp</dimen>
     <dimen name="font_post">11sp</dimen>
     <dimen name="font_icons">14sp</dimen>
+    <dimen name="fab_margin">15dp</dimen>
 </resources>

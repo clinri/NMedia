@@ -13,6 +13,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
 
     val currentPost = MutableLiveData<Post?>(null)
 
@@ -30,6 +31,10 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         )
         repository.save(post)
         currentPost.value = null
+    }
+
+    fun onAddClicked() {
+        navigateToPostContentScreenEvent.call()
     }
 
     //region PostInteractionListener
