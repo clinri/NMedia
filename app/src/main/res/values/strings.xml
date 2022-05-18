@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="avatar_description">Author avatar</string>
+    <string name="remove">Remove</string>
+    <string name="postText">input post\'s text here</string>
+    <string name="description_save">Save new post</string>
+    <string name="edit">Edit</string>
+    <string name="empty_content_toast">Content can\'t be empty</string>
 </resources>
