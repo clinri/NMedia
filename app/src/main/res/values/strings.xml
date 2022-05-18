@@ -6,4 +6,7 @@
     <string name="description_save">Save new post</string>
     <string name="edit">Edit</string>
     <string name="empty_content_toast">Content can\'t be empty</string>
+    <string name="edit_title">Edit message</string>
+    <string name="cancel_edit">Cancel edit</string>
+    <string name="editing_text">Editing text</string>
 </resources>

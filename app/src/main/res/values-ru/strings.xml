@@ -7,4 +7,7 @@
     <string name="description_save">Сохранить новый пост</string>
     <string name="edit">Редактировать</string>
     <string name="empty_content_toast">Текст поста не может быть пустым</string>
+    <string name="edit_title">Редактирование сообщения</string>
+    <string name="cancel_edit">Отмена редактирования</string>
+    <string name="editing_text">Редактруемое сообщение</string>
 </resources>

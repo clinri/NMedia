@@ -2,8 +2,10 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityPostBinding
 import ru.netology.nmedia.databinding.PostBinding
@@ -41,9 +43,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.currentPost.observe(this)
-        { currentPost ->
+        viewModel.currentPost.observe(this) { currentPost ->
             binding.contentEditText.setText(currentPost?.content)
+            binding.editTextView.setText(currentPost?.content)
+            if (currentPost != null) {
+                binding.groupEdit.visibility = View.VISIBLE
+                binding.closeEdit.setOnClickListener {
+                    viewModel.onCancelEditClicked()
+                    with(binding.contentEditText) {
+                        clearFocus()
+                        hideKeyboard()
+                    }
+                }
+            } else {
+                binding.groupEdit.visibility = View.GONE
+            }
         }
     }
 }
