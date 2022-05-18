@@ -16,8 +16,7 @@
         android:padding="@dimen/standard_padding_size"
         android:src="@drawable/netology_avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textTitle"
@@ -75,25 +74,35 @@
         android:singleLine="false"
         android:textSize="@dimen/font_post"
         app:layout_constraintTop_toBottomOf="@id/header_barrier"
-        tools:layout_editor_absoluteX="-27dp"
         tools:text="text" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/linkOfPost"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewVideo"
         android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/black"
+        android:src="@drawable/picture_video"
+        app:layout_constraintTop_toBottomOf="@id/textOfPost" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:lineSpacingMultiplier="1.4"
-        android:textSize="@dimen/font_post"
-        app:layout_constraintTop_toBottomOf="@id/textOfPost"
-        tools:text="Нетология https://netology.ru" />
+        android:contentDescription="@string/play_video"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewVideo"
+        app:layout_constraintEnd_toEndOf="@id/imageViewVideo"
+        app:layout_constraintStart_toStartOf="@id/imageViewVideo"
+        app:layout_constraintTop_toTopOf="@id/imageViewVideo"
+        app:maxImageSize="48dp"
+        app:srcCompat="@drawable/ic_play_button_white_48dp" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/footer_barrier"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="linkOfPost" />
+        app:constraint_referenced_ids="imageViewVideo" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"

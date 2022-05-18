@@ -14,6 +14,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
+    val viewVideoContent = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
 
     companion object {
@@ -30,7 +31,8 @@ class PostViewModel : ViewModel(), PostInteractionListener {
             id = PostRepository.NEW_POST_ID,
             author = "Me",
             content = content,
-            published = "Today"
+            published = "Today",
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         )
         repository.save(post)
         currentPost.value = null
@@ -48,6 +50,10 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onShareClicked(post: Post) {
         sharePostContent.value = post.content
         repository.share(post.id)
+    }
+
+    override fun onPlayClicked(post: Post) {
+        viewVideoContent.value = post.video
     }
 
     override fun onRemoveClicked(post: Post) =
