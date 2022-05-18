@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.onSaveButtonClicked(postContent)
         }
         viewModel.navigateToPostContentScreenEvent.observe(this) {
-            postContentActivityLauncher.launch()
+            postContentActivityLauncher.launch(it.toString())
         }
     }
 }

@@ -2,6 +2,7 @@ package ru.netology.nmedia.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.InMemoryPostRepository
@@ -13,9 +14,11 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
 
-    val currentPost = MutableLiveData<Post?>(null)
+    companion object {
+        val currentPost = MutableLiveData<Post?>(null)
+    }
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) {
@@ -34,7 +37,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     }
 
     fun onAddClicked() {
-        navigateToPostContentScreenEvent.call()
+        navigateToPostContentScreenEvent.value = PostContentActivity.MODE_ADD
     }
 
     //region PostInteractionListener
@@ -52,6 +55,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
+        navigateToPostContentScreenEvent.value = PostContentActivity.MODE_EDIT
     }
 
     override fun onCancelEditClicked() {

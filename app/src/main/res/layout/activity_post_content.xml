@@ -32,5 +32,5 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_post_save"
         app:layout_anchor="@id/bottomAppBar"
-        app:srcCompat="@drawable/ic_add_24dp" />
+        app:srcCompat="@drawable/ic_ok_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
