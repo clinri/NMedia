@@ -2,7 +2,6 @@ package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.R
@@ -42,12 +41,11 @@ class MainActivity : AppCompatActivity() {
 
         val postContentActivityLauncher = registerForActivityResult(
             PostContentActivity.ResultContract
-        ) { postContent ->
-            postContent ?: return@registerForActivityResult
-            viewModel.onSaveButtonClicked(postContent)
+        ) { postContent: String? ->
+            postContent?.let(viewModel::onSaveButtonClicked) ?: return@registerForActivityResult
         }
         viewModel.navigateToPostContentScreenEvent.observe(this) {
-            postContentActivityLauncher.launch(it.toString())
+            postContentActivityLauncher.launch(it)
         }
     }
 }
