@@ -13,7 +13,8 @@ class InMemoryPostRepository : PostRepository {
                 index + 1,
                 "Netology",
                 "Some random text $index",
-                "02.05.2021"
+                "02.05.2021",
+                video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
             )
         }
     )

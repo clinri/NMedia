@@ -56,7 +56,14 @@ internal class PostsAdapter(
             binding.sharePost.setOnClickListener {
                 listener.onShareClicked(post)
             }
+            binding.playButton.setOnClickListener {
+                listener.onPlayClicked(post)
+            }
+            binding.imageViewVideo.setOnClickListener {
+                listener.onPlayClicked(post)
+            }
         }
+
 
         fun bind(post: Post) {
             this.post = post

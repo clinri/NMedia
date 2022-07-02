@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,11 @@ class MainActivity : AppCompatActivity() {
                 intent, getString(R.string.chooser_share_post)
             )
             startActivity(shareIntent)
+        }
+
+        viewModel.viewVideoContent.observe(this) { url ->
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
 
         val postContentActivityLauncher = registerForActivityResult(
