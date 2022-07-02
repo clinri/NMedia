@@ -47,12 +47,11 @@ class MainActivity : AppCompatActivity() {
 
         val postContentActivityLauncher = registerForActivityResult(
             PostContentActivity.ResultContract
-        ) { postContent ->
-            postContent ?: return@registerForActivityResult
-            viewModel.onSaveButtonClicked(postContent)
+        ) { postContent: String? ->
+            postContent?.let(viewModel::onSaveButtonClicked) ?: return@registerForActivityResult
         }
         viewModel.navigateToPostContentScreenEvent.observe(this) {
-            postContentActivityLauncher.launch(it.toString())
+            postContentActivityLauncher.launch(it)
         }
     }
 }

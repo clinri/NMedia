@@ -15,11 +15,9 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val sharePostContent = SingleLiveEvent<String>()
     val viewVideoContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
 
-    companion object {
-        val currentPost = MutableLiveData<Post?>(null)
-    }
+    private val currentPost = MutableLiveData<Post?>(null)
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) {
@@ -36,10 +34,6 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         )
         repository.save(post)
         currentPost.value = null
-    }
-
-    fun onAddClicked() {
-        navigateToPostContentScreenEvent.value = PostContentActivity.MODE_ADD
     }
 
     //region PostInteractionListener
@@ -59,9 +53,13 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onRemoveClicked(post: Post) =
         repository.delete(post.id)
 
+    override fun onAddClicked() {
+        navigateToPostContentScreenEvent.value = null
+    }
+
     override fun onEditClicked(post: Post) {
+        navigateToPostContentScreenEvent.value = post.content
         currentPost.value = post
-        navigateToPostContentScreenEvent.value = PostContentActivity.MODE_EDIT
     }
 
     override fun onCancelEditClicked() {

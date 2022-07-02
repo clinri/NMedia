@@ -6,6 +6,7 @@ interface PostInteractionListener {
     fun onLikeClicked(post: Post)
     fun onShareClicked(post: Post)
     fun onRemoveClicked(post: Post)
+    fun onAddClicked()
     fun onEditClicked(post: Post)
     fun onCancelEditClicked()
     fun onPlayClicked(post: Post)
