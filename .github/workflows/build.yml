@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master, intents ]
+    branches: [ master, intents_video ]
 
 jobs:
   build:
