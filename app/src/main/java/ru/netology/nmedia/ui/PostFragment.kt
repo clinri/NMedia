@@ -60,7 +60,7 @@ class PostFragment : Fragment() {
 
         })
         viewModel.data.observe(viewLifecycleOwner) {
-            viewHolder.bind(arguments!!.idArg.let(viewModel::getPostById))
+            viewHolder.bind(requireArguments().idArg.let(viewModel::getPostById))
         }
         viewModel.navigateToNewPostFragment.observe(viewLifecycleOwner) {
             findNavController()
