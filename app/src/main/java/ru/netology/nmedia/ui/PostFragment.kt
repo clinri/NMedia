@@ -59,8 +59,6 @@ class PostFragment : Fragment() {
             }
 
         })
-        val post = arguments!!.idArg.let(viewModel::getPostById)
-        viewHolder.bind(post)
         viewModel.data.observe(viewLifecycleOwner) {
             viewHolder.bind(arguments!!.idArg.let(viewModel::getPostById))
         }
