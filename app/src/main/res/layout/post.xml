@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/postCardFrame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/common_spacing"
-    tools:context=".activity.MainActivity">
+    android:padding="@dimen/common_spacing">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/avatar"
@@ -90,9 +90,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:alpha="0.72"
-        android:foregroundGravity="center"
         android:contentDescription="@string/play_video"
         android:foreground="@drawable/ic_play_button_white_84dp"
+        android:foregroundGravity="center"
         app:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/imageViewVideo"
         app:layout_constraintEnd_toEndOf="@id/imageViewVideo"
@@ -144,5 +144,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/like"
         tools:text="20000" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/postGroupVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="imageViewVideo,playButton" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/postGroupFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="postCardFrame,avatar,textTitle,date,view,textOfPost" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.FilePostRepository
-import ru.netology.nmedia.data.impl.SharedPrefsPostRepository
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.util.ItemNotFoundExceptions
 import ru.netology.nmedia.util.SingleLiveEvent
 
-class PostViewModel(
+open class PostViewModel(
     application: Application
 ) : AndroidViewModel(application), PostInteractionListener {
     private val repository: PostRepository = FilePostRepository(application)
@@ -18,7 +18,9 @@ class PostViewModel(
 
     val sharePostContent = SingleLiveEvent<String>()
     val viewVideoContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
+    val navigateToNewPostFragment = SingleLiveEvent<String?>()
+    val navigateToSinglePostFragment = SingleLiveEvent<Int>()
+    val navigateAfterOnRemoveClickedFromPostFragment = SingleLiveEvent<Post>()
 
     private val currentPost = MutableLiveData<Post?>(null)
 
@@ -53,15 +55,19 @@ class PostViewModel(
         viewVideoContent.value = post.video
     }
 
+    override fun onPostClicked(postId: Int) {
+        navigateToSinglePostFragment.value = postId
+    }
+
     override fun onRemoveClicked(post: Post) =
         repository.delete(post.id)
 
     override fun onAddClicked() {
-        navigateToPostContentScreenEvent.value = null
+        navigateToNewPostFragment.value = null
     }
 
     override fun onEditClicked(post: Post) {
-        navigateToPostContentScreenEvent.value = post.content
+        navigateToNewPostFragment.value = post.content
         currentPost.value = post
     }
 
@@ -69,4 +75,16 @@ class PostViewModel(
         currentPost.value = null
     }
     //endregion InteractionListener
+
+    fun getPostById(postId: Int): Post {
+        for (post in repository.data.value!!) {
+            if (post.id == postId)
+                return post
+        }
+        throw ItemNotFoundExceptions()
+    }
+
+    fun deletePostAfterNavigateFromPostFragment(post: Post) {
+        navigateAfterOnRemoveClickedFromPostFragment.value = post
+    }
 }
