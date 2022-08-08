@@ -77,11 +77,7 @@ open class PostViewModel(
     //endregion InteractionListener
 
     fun getPostById(postId: Int): Post {
-        for (post in repository.data.value!!) {
-            if (post.id == postId)
-                return post
-        }
-        throw ItemNotFoundExceptions()
+        return data.value?.find { it.id == postId } ?: throw ItemNotFoundExceptions()
     }
 
     fun deletePostAfterNavigateFromPostFragment(post: Post) {
