@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -22,11 +23,26 @@ class NewPostFragment : Fragment() {
         val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
 
         arguments?.textArg.let(binding.edit::setText)
+        if (!viewModel.draft.getLockStatus()) {
+            viewModel.draft.getContent().let(binding.edit::setText)
+        }
         binding.edit.requestFocus()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!viewModel.draft.getLockStatus()){
+                val text = binding.edit.text.toString()
+                viewModel.draft.setContent(text)
+            }
+            findNavController().navigateUp()
+        }
+
         binding.ok.setOnClickListener {
             val postContent = binding.edit.text.toString()
             if (!postContent.isNullOrBlank()) {
                 viewModel.onSaveButtonClicked(postContent)
+            }
+            if (!viewModel.draft.getLockStatus()) {
+                viewModel.draft.clearContent()
             }
             findNavController().navigateUp()
         }
