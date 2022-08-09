@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityAppBinding
@@ -11,7 +12,7 @@ import ru.netology.nmedia.ui.NewPostFragment.Companion.textArg
 
 class AppActivity : AppCompatActivity() {
 
-    private lateinit var binding :ActivityAppBinding
+    private lateinit var binding: ActivityAppBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,8 @@ class AppActivity : AppCompatActivity() {
             }
             val fragment =
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+            fragment.findNavController().navigateUp()
             fragment.navController.navigate(
                 R.id.action_feedFragment_to_postContentFragment,
                 Bundle().apply {
