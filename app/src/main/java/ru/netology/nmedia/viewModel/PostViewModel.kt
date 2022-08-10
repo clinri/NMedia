@@ -74,7 +74,7 @@ open class PostViewModel(
     }
 
     override fun onEditClicked(post: Post) {
-        draft.Lock()
+        draft.lock()
         navigateToNewPostFragment.value = post.content
         currentPost.value = post
     }

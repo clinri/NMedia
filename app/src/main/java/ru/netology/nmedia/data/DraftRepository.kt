@@ -4,9 +4,9 @@ import ru.netology.nmedia.dto.Draft
 
 interface DraftRepository{
     val draft:Draft
-    fun Lock()
+    fun lock()
     fun unLock()
-    fun getLockStatus():Boolean
+    fun isLocked():Boolean
     fun setContent(content: String)
     fun getContent():String
     fun clearContent()

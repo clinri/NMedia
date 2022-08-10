@@ -23,13 +23,13 @@ class NewPostFragment : Fragment() {
         val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
 
         arguments?.textArg.let(binding.edit::setText)
-        if (!viewModel.draft.getLockStatus()) {
+        if (!viewModel.draft.isLocked()) {
             viewModel.draft.getContent().let(binding.edit::setText)
         }
         binding.edit.requestFocus()
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (!viewModel.draft.getLockStatus()){
+            if (!viewModel.draft.isLocked()){
                 val text = binding.edit.text.toString()
                 viewModel.draft.setContent(text)
             }
@@ -41,7 +41,7 @@ class NewPostFragment : Fragment() {
             if (!postContent.isNullOrBlank()) {
                 viewModel.onSaveButtonClicked(postContent)
             }
-            if (!viewModel.draft.getLockStatus()) {
+            if (!viewModel.draft.isLocked()) {
                 viewModel.draft.clearContent()
             }
             findNavController().navigateUp()

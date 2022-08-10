@@ -9,7 +9,7 @@ class DraftRepositoryImpl : DraftRepository {
         content = ""
     )
 
-    override fun Lock() {
+    override fun lock() {
         draft = draft.copy(isLock = true)
     }
 
@@ -17,7 +17,7 @@ class DraftRepositoryImpl : DraftRepository {
         draft = draft.copy(isLock = false)
     }
 
-    override fun getLockStatus(): Boolean {
+    override fun isLocked(): Boolean {
         return draft.isLock
     }
 
