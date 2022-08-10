@@ -32,6 +32,7 @@ class NewPostFragment : Fragment() {
             if (!viewModel.draft.isLocked()){
                 val text = binding.edit.text.toString()
                 viewModel.draft.setContent(text)
+                viewModel.draft.lock()
             }
             findNavController().navigateUp()
         }

@@ -7,8 +7,9 @@ import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.DraftRepository
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.DraftRepositoryImpl
-import ru.netology.nmedia.data.impl.SQLiteRepository
+import ru.netology.nmedia.data.impl.PostRepositoryImpl
 import ru.netology.nmedia.db.AppDb
+import ru.netology.nmedia.db.toEntity
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.ItemNotFoundExceptions
 import ru.netology.nmedia.util.SingleLiveEvent
@@ -16,7 +17,7 @@ import ru.netology.nmedia.util.SingleLiveEvent
 open class PostViewModel(
     application: Application
 ) : AndroidViewModel(application), PostInteractionListener {
-    private val repository: PostRepository = SQLiteRepository(
+    private val repository: PostRepository = PostRepositoryImpl(
         dao = AppDb.getInstanse(application).postDao
     )
     val data by repository::data
@@ -34,16 +35,19 @@ open class PostViewModel(
         if (content.isBlank()) {
             return
         }
-        val post = currentPost.value?.copy( // edit
-            content = content
-        ) ?: Post( // new
-            id = PostRepository.NEW_POST_ID,
-            author = "Me",
-            content = content,
-            published = "Today",
-            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
+        currentPost.value?.also {
+            repository.updateContentById(
+                it.copy(content = content)
+            )
+        } ?: repository.insert(
+            Post( // new
+                id = PostRepository.NEW_POST_ID,
+                author = "Me",
+                content = content,
+                published = "Today",
+                video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
+            )
         )
-        repository.save(post)
         currentPost.value = null
     }
 
@@ -53,6 +57,7 @@ open class PostViewModel(
         repository.like(post.id)
 
     override fun onShareClicked(post: Post) {
+        draft.lock()
         sharePostContent.value = post.content
         repository.share(post.id)
     }
@@ -90,9 +95,5 @@ open class PostViewModel(
 
     fun deletePostAfterNavigateFromPostFragment(post: Post) {
         navigateAfterOnRemoveClickedFromPostFragment.value = post
-    }
-
-    companion object {
-
     }
 }
