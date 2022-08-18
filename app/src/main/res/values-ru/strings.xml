@@ -17,4 +17,5 @@
     <string name="channel_remote_name">Серверное уведомление</string>
     <string name="channel_remote_description">Уведомление от удаленного сервера</string>
     <string name="notification_user_liked">Пользователь %1$s поставил лайк посту %2$s</string>
+    <string name="notification_new_post">Пользователь %s опубликовал новый пост:</string>
 </resources>

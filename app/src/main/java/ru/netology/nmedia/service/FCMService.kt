@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -40,6 +41,7 @@ class FCMService : FirebaseMessagingService() {
 
         when (action) {
             Action.Like -> handleLikeAction(data[CONTENT_KEY] ?: return)
+            Action.NewPost -> handleNewPostAction(data[CONTENT_KEY] ?: return)
         }
     }
 
@@ -62,7 +64,25 @@ class FCMService : FirebaseMessagingService() {
             .build()
         NotificationManagerCompat.from(this)
             .notify(Random.nextInt(100_000),notification)
+    }
 
+    private fun handleNewPostAction(serializedContent: String) {
+        val newPostContent = gson.fromJson(serializedContent, NewPost::class.java)
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(
+                getString(
+                    R.string.notification_new_post,
+                    newPostContent.postAuthor
+                )
+            )
+            .setStyle(NotificationCompat.BigTextStyle().bigText(
+                newPostContent.postContent.replace("\n", "")
+            ))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(100_000),notification)
     }
 
     private companion object {
