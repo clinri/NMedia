@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.21'
     id 'kotlin-kapt'
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -62,4 +64,8 @@ dependencies {
     def room_version = "2.4.3"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:30.3.2')
+    implementation "com.google.firebase:firebase-messaging-ktx"
 }
